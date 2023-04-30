@@ -15,7 +15,7 @@ def LecturaInicial(ruta):
     return texto
 
 
-result=LecturaInicial(ruta)
+
 
 
 def DetectarSimbolo(caracter):
@@ -73,38 +73,39 @@ print(DetectarSimbolo(simbolo))
 
 
 #reconocimiento jsons
-
-contenido_nuevo=""
-contenido=result
-posicion=0
-tope=len(contenido)
-while True:
-    if posicion>=tope:
-        break
-    else:
-        char=contenido[posicion]
-        if char=="{":
-            json=char
-            posicion_interna=posicion+1
-            while True:
-                if posicion_interna>=tope:
-                    break
-                else:
-                    char_interno=contenido[posicion_interna]
-                    if char_interno=="}":
-                        json+=char_interno
-                        posicion_interna+=1
+def TransFormacionJsons(result):
+    contenido_nuevo=""
+    contenido=result
+    posicion=0
+    tope=len(contenido)
+    while True:
+        if posicion>=tope:
+            break
+        else:
+            char=contenido[posicion]
+            if char=="{":
+                json=char
+                posicion_interna=posicion+1
+                while True:
+                    if posicion_interna>=tope:
                         break
                     else:
-                        json+=char_interno
-                        posicion_interna+=1
-            posicion=posicion_interna
-            
-            new_txt=json.replace('"',"'")
-            contenido_nuevo+=new_txt
-        else:
-            contenido_nuevo+=char
-            posicion+=1
+                        char_interno=contenido[posicion_interna]
+                        if char_interno=="}":
+                            json+=char_interno
+                            posicion_interna+=1
+                            break
+                        else:
+                            json+=char_interno
+                            posicion_interna+=1
+                posicion=posicion_interna
+                
+                new_txt=json.replace('"',"'")
+                contenido_nuevo+=new_txt
+            else:
+                contenido_nuevo+=char
+                posicion+=1
+    return result
 
 
 
@@ -408,9 +409,14 @@ def VerificarLexemas(lista_lexemas):
                         if lexema.lexema[0:3]=="---":
                             lexema.token="Comentario"
                             encontro=True
-                        elif lexema.lexema[0:2]=="/*" and lexema.lexema[len(lexema.lexema)-2:len(lexema.lexema)]=="*/":
-                            lexema.token="Comentario"
-                            encontro=True
+                        elif lexema.lexema[0:2]=="/*":
+                            if lexema.lexema[len(lexema.lexema)-2:len(lexema.lexema)]=="*/":
+                                lexema.token="Comentario"
+                                encontro=True
+                            else:
+                                encontro=True
+                                lexema.token="Desconocido"
+                                lexema.error="No se cerro el comentario"
                         else:
                             lexema.token="Desconocido"
                             encontro=True
@@ -419,11 +425,19 @@ def VerificarLexemas(lista_lexemas):
                         encontro=True
                     if encontro==False:
                         lexema.token="Desconocido"
-                        
-                    
+
+    errores=[]                   
+    for x in lista_lexemas:
+        if x.error!="":
+            errores.append(x.error)
+    
+    return errores
 
 
 
+#Ejecucion del analizador
+result=LecturaInicial(ruta)
+contenido_nuevo=TransFormacionJsons(result)
 lexemas=ObtencionLexemas(contenido_nuevo)
 VerificarLexemas(lexemas)
 
@@ -432,8 +446,61 @@ for j in lexemas:
     print("->",j.lexema,j.token,j.linea,j.columna,"<--")
 
 
+#Transformacion de las sentencias iniciales a mongo db
+
+salida=[]
+errores_sintacticos=[]
+
+for i in lexemas:
+    if i.token=="CrearBD":
+        linea=i.linea
+        indice=lexemas.index(i)
+        if lexemas[indice+1].token=="Identificador":
+            if lexemas[indice+1].linea==linea:
+                if lexemas[indice+2].token=="Igual":
+                    if lexemas[indice+2].linea==linea:
+                        if lexemas[indice+3].token=="nueva":
+                            if lexemas[indice+3].linea==linea:
+                                if lexemas[indice+4].token=="CrearBD":
+                                    if lexemas[indice+4].linea==linea:
+                                        if lexemas[indice+5].token=="AperturaParentesis":
+                                            if lexemas[indice+5].linea==linea:
+                                                if lexemas[indice+6].token=="CerraduraParentesis":
+                                                    if lexemas[indice+6].linea==linea:
+                                                        if lexemas[indice+7].token=="FinSentencia":
+                                                            if lexemas[indice+7].linea==linea:
+                                                                salida.append("use('"+str(lexemas[indice+1].lexema)+"');")
+                                                            else:
+                                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Fuera de la posicion esperada"])
+                                                        else:
+                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Se esperaba un punto y coma para la funcion CrearDB"])
+                                                    else:
+                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Fuera de la posicion esperada"])
+                                                else:
+                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Se esperaba un parentesis para la funcion CrearDB"])
+                                            else:
+                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Fuera de la posicion esperada"])
+                                        else:
+                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Se esperaba un parentesis para la funcion CrearDB"])
+                                    else:
+                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"CrearDB","Fuera de la posicion esperada"])
+                                else:
+                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"CrearDB","Se esperaba la palabra reserbada CrearDB para la funcion CrearDB"])
+                            else:
+                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Fuera de la posicion esperada"])
+                        else:
+                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Se esperaba la palabra reservada nueva para la funcion CrearDB"])
+                    else:
+                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Fuera de la posicion esperada"])
+                else:
+                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Se esperaba un signo igual para la funcion CrearDB"])
+            else:
+                errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Fuera de la posicion esperada"])
+        else:
+            errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Se esperaba un identificador para la funcion CrearDB"])
 
 
+print(salida)
 
 
 
