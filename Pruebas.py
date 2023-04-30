@@ -105,7 +105,7 @@ def TransFormacionJsons(result):
             else:
                 contenido_nuevo+=char
                 posicion+=1
-    return result
+    return contenido_nuevo
 
 
 
@@ -451,56 +451,80 @@ for j in lexemas:
 salida=[]
 errores_sintacticos=[]
 
-for i in lexemas:
-    if i.token=="CrearBD":
-        linea=i.linea
-        indice=lexemas.index(i)
-        if lexemas[indice+1].token=="Identificador":
-            if lexemas[indice+1].linea==linea:
-                if lexemas[indice+2].token=="Igual":
-                    if lexemas[indice+2].linea==linea:
-                        if lexemas[indice+3].token=="nueva":
-                            if lexemas[indice+3].linea==linea:
-                                if lexemas[indice+4].token=="CrearBD":
-                                    if lexemas[indice+4].linea==linea:
-                                        if lexemas[indice+5].token=="AperturaParentesis":
-                                            if lexemas[indice+5].linea==linea:
-                                                if lexemas[indice+6].token=="CerraduraParentesis":
-                                                    if lexemas[indice+6].linea==linea:
-                                                        if lexemas[indice+7].token=="FinSentencia":
-                                                            if lexemas[indice+7].linea==linea:
-                                                                salida.append("use('"+str(lexemas[indice+1].lexema)+"');")
+
+broke=len(lexemas)
+apuntador=0
+while True:
+    if apuntador>=broke:
+        break
+    else:
+        i=lexemas[apuntador]
+        if i.token=="CrearBD":
+            linea=i.linea
+            indice=lexemas.index(i)
+            if lexemas[indice+1].token=="Identificador":
+                if lexemas[indice+1].linea==linea:
+                    if lexemas[indice+2].token=="Igual":
+                        if lexemas[indice+2].linea==linea:
+                            if lexemas[indice+3].token=="nueva":
+                                if lexemas[indice+3].linea==linea:
+                                    if lexemas[indice+4].token=="CrearBD":
+                                        if lexemas[indice+4].linea==linea:
+                                            if lexemas[indice+5].token=="AperturaParentesis":
+                                                if lexemas[indice+5].linea==linea:
+                                                    if lexemas[indice+6].token=="CerraduraParentesis":
+                                                        if lexemas[indice+6].linea==linea:
+                                                            if lexemas[indice+7].token=="FinSentencia":
+                                                                if lexemas[indice+7].linea==linea:
+                                                                    salida.append("use('"+str(lexemas[indice+1].lexema)+"');")
+                                                                    apuntador=indice+8
+                                                                else:
+                                                                    apuntador=indice+8
+                                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Fuera de la posicion esperada"])
                                                             else:
-                                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Fuera de la posicion esperada"])
+                                                                apuntador=indice+8
+                                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Se esperaba un punto y coma para la funcion CrearDB"])
                                                         else:
-                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Se esperaba un punto y coma para la funcion CrearDB"])
+                                                            apuntador=indice+7
+                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Fuera de la posicion esperada"])
                                                     else:
-                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Fuera de la posicion esperada"])
+                                                        apuntador=indice+7
+                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Se esperaba un parentesis para la funcion CrearDB"])
                                                 else:
-                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Se esperaba un parentesis para la funcion CrearDB"])
+                                                    apuntador=indice+6
+                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Fuera de la posicion esperada"])
                                             else:
-                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Fuera de la posicion esperada"])
+                                                apuntador=indice+6
+                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Se esperaba un parentesis para la funcion CrearDB"])
                                         else:
-                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Se esperaba un parentesis para la funcion CrearDB"])
+                                            apuntador=indice+5
+                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"CrearDB","Fuera de la posicion esperada"])
                                     else:
-                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"CrearDB","Fuera de la posicion esperada"])
+                                        apuntador=indice+5
+                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"CrearDB","Se esperaba la palabra reserbada CrearDB para la funcion CrearDB"])
                                 else:
-                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"CrearDB","Se esperaba la palabra reserbada CrearDB para la funcion CrearDB"])
+                                    apuntador=indice+4
+                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Fuera de la posicion esperada"])
                             else:
-                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Fuera de la posicion esperada"])
+                                apuntador=indice+4
+                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Se esperaba la palabra reservada nueva para la funcion CrearDB"])
                         else:
-                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Se esperaba la palabra reservada nueva para la funcion CrearDB"])
+                            apuntador=indice+3
+                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Fuera de la posicion esperada"])
                     else:
-                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Fuera de la posicion esperada"])
+                        apuntador=indice+3
+                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Se esperaba un signo igual para la funcion CrearDB"])
                 else:
-                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Se esperaba un signo igual para la funcion CrearDB"])
+                    apuntador=indice+2
+                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Fuera de la posicion esperada"])
             else:
-                errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Fuera de la posicion esperada"])
+                errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Se esperaba un identificador para la funcion CrearDB"])
+                apuntador=indice+2
+
         else:
-            errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Se esperaba un identificador para la funcion CrearDB"])
-
-
+            apuntador+=1
 print(salida)
+print(errores_sintacticos)
 
 
 
