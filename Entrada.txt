@@ -3,7 +3,7 @@ EliminarBD elimina = nueva EliminarBD();
 CrearColeccion colec = nueva CrearColeccion("NombreColeccion");
 EliminarColeccion eliminacolec = nueva EliminarColeccion("NombreColeccion");
 --- Esto es un comentario
-InsertarUnico insertadoc = nueva InsertarUnico("NombreColeccion" , @adsfa/
+InsertarUnico insertadoc = nueva InsertarUnico("NombreColeccion" ,
 "
 {
  "nombre" : "Obra Literaria",

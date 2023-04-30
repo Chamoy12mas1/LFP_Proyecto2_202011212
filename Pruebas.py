@@ -720,8 +720,369 @@ while True:
             else:
                 errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Se esperaba un identificador para la funcion EliminarColeccion"])
                 apuntador+=1
+        elif i.token=="InsertarUnico":
+            linea=i.linea
+            indice=apuntador
+            if lexemas[indice+1].token=="Identificador":
+                if lexemas[indice+1].linea==linea:
+                    if lexemas[indice+2].token=="Igual":
+                        if lexemas[indice+2].linea==linea:
+                            if lexemas[indice+3].token=="nueva":
+                                if lexemas[indice+3].linea==linea:
+                                    if lexemas[indice+4].token=="InsertarUnico":
+                                        if lexemas[indice+4].linea==linea:
+                                            if lexemas[indice+5].token=="AperturaParentesis":
+                                                if lexemas[indice+5].linea==linea:
+                                                    if lexemas[indice+6].token=="String":
+                                                        if lexemas[indice+6].linea==linea:
+                                                            if lexemas[indice+7].token=="Coma":
+                                                                if lexemas[indice+7].linea==linea:
+                                                                    if lexemas[indice+8].token=="json":
+                                                                        if lexemas[indice+9].token=="CerraduraParentesis":
+                                                                                if lexemas[indice+10].token=="FinSentencia":
+                                                                                    salida.append("db."+str(lexemas[indice+6].lexema)[1:len(lexemas[indice+6].lexema)-1]+".insertOne("+str(lexemas[indice+8].lexema)[1:len(lexemas[indice+8].lexema)-1]+");")
+                                                                                    apuntador+=10
+                                                                                else:
+                                                                                    apuntador+=10
+                                                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+10].linea,lexemas[indice+10].columna,"FinSentencia","Se esperaba un punto y coma para la funcion InsertarUnico"])
+                                                                        else:
+                                                                            apuntador+=9
+                                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+9].linea,lexemas[indice+9].columna,"CerraduraParentesis","Se esperaba un parentesis para la funcion InsertarUnico"])
+                                                                        
+                                                                    else:
+                                                                        apuntador+=8
+                                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+8].linea,lexemas[indice+8].columna,"json","Se esperaba un Json para la funcion InsertarUnico"])
+                                                                else:
+                                                                    apuntador+=7
+                                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"Coma","Fuera de la posicion esperada"])
+                                                            else:
+                                                                apuntador+=7
+                                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"Coma","Se esperaba una coma para la funcion InsertarUnico"])
+                                                        else:
+                                                            apuntador+=6
+                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Fuera de la posicion esperada"])
+                                                    else:
+                                                        apuntador+=6
+                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Se esperaba un String para la funcion InsertarUnico"])
+                                                else:
+                                                    apuntador+=5
+                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Fuera de la posicion esperada"])
+                                            else:
+                                                apuntador+=5
+                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Se esperaba un parentesis para la funcion InsertarUnico"])
+                                        else:
+                                            apuntador+=4
+                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"InsertarUnico","Fuera de la posicion esperada"])
+                                    else:
+                                        apuntador+=4
+                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"InsertarUnico","Se esperaba la palabra reservada InsertarUnico para la funcion InsertarUnico"])
+                                else:
+                                    apuntador+=3
+                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Fuera de la posicion esperada"])
+                            else:
+                                apuntador+=3
+                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Se esperaba la palabra reservada nueva para la funcion InsertarUnico"])
+                        else:
+                            apuntador+=2
+                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Fuera de la posicion esperada"])
+                    else:
+                        apuntador+=2
+                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Se esperaba un signo igual para la funcion InsertarUnico"])
+                else:
+                    apuntador+=1
+                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Fuera de la posicion esperada"])
+            else:
+                errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Se esperaba un identificador para la funcion InsertarUnico"])
+                apuntador+=1
+        elif i.token=="ActualizarUnico":
+            linea=i.linea
+            indice=apuntador
+            if lexemas[indice+1].token=="Identificador":
+                if lexemas[indice+1].linea==linea:
+                    if lexemas[indice+2].token=="Igual":
+                        if lexemas[indice+2].linea==linea:
+                            if lexemas[indice+3].token=="nueva":
+                                if lexemas[indice+3].linea==linea:
+                                    if lexemas[indice+4].token=="ActualizarUnico":
+                                        if lexemas[indice+4].linea==linea:
+                                            if lexemas[indice+5].token=="AperturaParentesis":
+                                                if lexemas[indice+5].linea==linea:
+                                                    if lexemas[indice+6].token=="String":
+                                                        if lexemas[indice+6].linea==linea:
+                                                            if lexemas[indice+7].token=="Coma":
+                                                                if lexemas[indice+7].linea==linea:
+                                                                    if lexemas[indice+8].token=="json":
+                                                                        if lexemas[indice+9].token=="CerraduraParentesis":
+                                                                                if lexemas[indice+10].token=="FinSentencia":
+                                                                                    salida.append("db."+str(lexemas[indice+6].lexema)[1:len(lexemas[indice+6].lexema)-1]+".updateOne("+str(lexemas[indice+8].lexema)[1:len(lexemas[indice+8].lexema)-1]+");")
+                                                                                    apuntador+=10
+                                                                                else:
+                                                                                    apuntador+=10
+                                                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+10].linea,lexemas[indice+10].columna,"FinSentencia","Se esperaba un punto y coma para la funcion ActualizarUnico"])
+                                                                        else:
+                                                                            apuntador+=9
+                                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+9].linea,lexemas[indice+9].columna,"CerraduraParentesis","Se esperaba un parentesis para la funcion ActualizarUnico"])
+                                                                        
+                                                                    else:
+                                                                        apuntador+=8
+                                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+8].linea,lexemas[indice+8].columna,"json","Se esperaba un Json para la funcion ActualizarUnico"])
+                                                                else:
+                                                                    apuntador+=7
+                                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"Coma","Fuera de la posicion esperada"])
+                                                            else:
+                                                                apuntador+=7
+                                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"Coma","Se esperaba una coma para la funcion ActualizarUnico"])
+                                                        else:
+                                                            apuntador+=6
+                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Fuera de la posicion esperada"])
+                                                    else:
+                                                        apuntador+=6
+                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Se esperaba un String para la funcion ActualizarUnico"])
+                                                else:
+                                                    apuntador+=5
+                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Fuera de la posicion esperada"])
+                                            else:
+                                                apuntador+=5
+                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Se esperaba un parentesis para la funcion ActualizarUnico"])
+                                        else:
+                                            apuntador+=4
+                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"ActualizarUnico","Fuera de la posicion esperada"])
+                                    else:
+                                        apuntador+=4
+                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"ActualizarUnico","Se esperaba la palabra reservada ActualizarUnico para la funcion ActualizarUnico"])
+                                else:
+                                    apuntador+=3
+                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Fuera de la posicion esperada"])
+                            else:
+                                apuntador+=3
+                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Se esperaba la palabra reservada nueva para la funcion ActualizarUnico"])
+                        else:
+                            apuntador+=2
+                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Fuera de la posicion esperada"])
+                    else:
+                        apuntador+=2
+                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Se esperaba un signo igual para la funcion ActualizarUnico"])
+                else:
+                    apuntador+=1
+                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Fuera de la posicion esperada"])
+            else:
+                errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Se esperaba un identificador para la funcion ActualizarUnico"])
+                apuntador+=1
+        elif i.token=="EliminarUnico":
+            linea=i.linea
+            indice=apuntador
+            if lexemas[indice+1].token=="Identificador":
+                if lexemas[indice+1].linea==linea:
+                    if lexemas[indice+2].token=="Igual":
+                        if lexemas[indice+2].linea==linea:
+                            if lexemas[indice+3].token=="nueva":
+                                if lexemas[indice+3].linea==linea:
+                                    if lexemas[indice+4].token=="EliminarUnico":
+                                        if lexemas[indice+4].linea==linea:
+                                            if lexemas[indice+5].token=="AperturaParentesis":
+                                                if lexemas[indice+5].linea==linea:
+                                                    if lexemas[indice+6].token=="String":
+                                                        if lexemas[indice+6].linea==linea:
+                                                            if lexemas[indice+7].token=="Coma":
+                                                                if lexemas[indice+7].linea==linea:
+                                                                    if lexemas[indice+8].token=="json":
+                                                                        if lexemas[indice+9].token=="CerraduraParentesis":
+                                                                                if lexemas[indice+10].token=="FinSentencia":
+                                                                                    salida.append("db."+str(lexemas[indice+6].lexema)[1:len(lexemas[indice+6].lexema)-1]+".deleteOne("+str(lexemas[indice+8].lexema)[1:len(lexemas[indice+8].lexema)-1]+");")
+                                                                                    apuntador+=10
+                                                                                else:
+                                                                                    apuntador+=10
+                                                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+10].linea,lexemas[indice+10].columna,"FinSentencia","Se esperaba un punto y coma para la funcion EliminarUnico"])
+                                                                        else:
+                                                                            apuntador+=9
+                                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+9].linea,lexemas[indice+9].columna,"CerraduraParentesis","Se esperaba un parentesis para la funcion EliminarUnico"])
+                                                                        
+                                                                    else:
+                                                                        apuntador+=8
+                                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+8].linea,lexemas[indice+8].columna,"json","Se esperaba un Json para la funcion EliminarUnico"])
+                                                                else:
+                                                                    apuntador+=7
+                                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"Coma","Fuera de la posicion esperada"])
+                                                            else:
+                                                                apuntador+=7
+                                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"Coma","Se esperaba una coma para la funcion EliminarUnico"])
+                                                        else:
+                                                            apuntador+=6
+                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Fuera de la posicion esperada"])
+                                                    else:
+                                                        apuntador+=6
+                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Se esperaba un String para la funcion EliminarUnico"])
+                                                else:
+                                                    apuntador+=5
+                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Fuera de la posicion esperada"])
+                                            else:
+                                                apuntador+=5
+                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Se esperaba un parentesis para la funcion EliminarUnico"])
+                                        else:
+                                            apuntador+=4
+                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"EliminarUnico","Fuera de la posicion esperada"])
+                                    else:
+                                        apuntador+=4
+                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"EliminarUnico","Se esperaba la palabra reservada EliminarUnico para la funcion EliminarUnico"])
+                                else:
+                                    apuntador+=3
+                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Fuera de la posicion esperada"])
+                            else:
+                                apuntador+=3
+                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Se esperaba la palabra reservada nueva para la funcion EliminarUnico"])
+                        else:
+                            apuntador+=2
+                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Fuera de la posicion esperada"])
+                    else:
+                        apuntador+=2
+                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Se esperaba un signo igual para la funcion EliminarUnico"])
+                else:
+                    apuntador+=1
+                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Fuera de la posicion esperada"])
+            else:
+                errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Se esperaba un identificador para la funcion EliminarUnico"])
+                apuntador+=1
+        elif i.token=="BuscarTodo":
+            linea=i.linea
+            indice=apuntador
+            if lexemas[indice+1].token=="Identificador":
+                if lexemas[indice+1].linea==linea:
+                    if lexemas[indice+2].token=="Igual":
+                        if lexemas[indice+2].linea==linea:
+                            if lexemas[indice+3].token=="nueva":
+                                if lexemas[indice+3].linea==linea:
+                                    if lexemas[indice+4].token=="BuscarTodo":
+                                        if lexemas[indice+4].linea==linea:
+                                            if lexemas[indice+5].token=="AperturaParentesis":
+                                                if lexemas[indice+5].linea==linea:
+                                                    if lexemas[indice+6].token=="String":
+                                                        if lexemas[indice+6].linea==linea:
+                                                            if lexemas[indice+7].token=="CerraduraParentesis":
+                                                                if lexemas[indice+7].linea==linea:
+                                                                    if lexemas[indice+8].token=="FinSentencia":
+                                                                        if lexemas[indice+8].linea==linea:
+                                                                            salida.append("db."+str(lexemas[indice+6].lexema)[1:len(lexemas[indice+6].lexema)-1]+".find();")
+                                                                            apuntador+=8
+                                                                        else:
+                                                                            apuntador+=8
+                                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Fuera de la posicion esperada"])
+                                                                    else:
+                                                                        apuntador+=8
+                                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Se esperaba un punto y coma para la funcion BuscarTodo"])
+                                                                else:
+                                                                    apuntador+=7
+                                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Fuera de la posicion esperada"])
+                                                            else:
+                                                                apuntador+=7
+                                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Se esperaba un parentesis para la funcion BuscarTodo"])
+                                                        else:
+                                                            apuntador+=6
+                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Fuera de la posicion esperada"])
+                                                    else:
+                                                        apuntador+=6
+                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Se esperaba un String para la funcion BuscarTodo"])
+                                                else:
+                                                    apuntador+=5
+                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Fuera de la posicion esperada"])
+                                            else:
+                                                apuntador+=5
+                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Se esperaba un parentesis para la funcion BuscarTodo"])
+                                        else:
+                                            apuntador+=4
+                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"BuscarTodo","Fuera de la posicion esperada"])
+                                    else:
+                                        apuntador+=4
+                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"BuscarTodo","Se esperaba la palabra reservada BuscarTodo para la funcion BuscarTodo"])
+                                else:
+                                    apuntador+=3
+                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Fuera de la posicion esperada"])
+                            else:
+                                apuntador+=3
+                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Se esperaba la palabra reservada nueva para la funcion BuscarTodo"])
+                        else:
+                            apuntador+=2
+                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Fuera de la posicion esperada"])
+                    else:
+                        apuntador+=2
+                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Se esperaba un signo igual para la funcion BuscarTodo"])
+                else:
+                    apuntador+=1
+                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Fuera de la posicion esperada"])
+            else:
+                errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Se esperaba un identificador para la funcion BuscarTodo"])
+                apuntador+=1
+        elif i.token=="BuscarUnico":
+            linea=i.linea
+            indice=apuntador
+            if lexemas[indice+1].token=="Identificador":
+                if lexemas[indice+1].linea==linea:
+                    if lexemas[indice+2].token=="Igual":
+                        if lexemas[indice+2].linea==linea:
+                            if lexemas[indice+3].token=="nueva":
+                                if lexemas[indice+3].linea==linea:
+                                    if lexemas[indice+4].token=="BuscarUnico":
+                                        if lexemas[indice+4].linea==linea:
+                                            if lexemas[indice+5].token=="AperturaParentesis":
+                                                if lexemas[indice+5].linea==linea:
+                                                    if lexemas[indice+6].token=="String":
+                                                        if lexemas[indice+6].linea==linea:
+                                                            if lexemas[indice+7].token=="CerraduraParentesis":
+                                                                if lexemas[indice+7].linea==linea:
+                                                                    if lexemas[indice+8].token=="FinSentencia":
+                                                                        if lexemas[indice+8].linea==linea:
+                                                                            salida.append("db."+str(lexemas[indice+6].lexema)[1:len(lexemas[indice+6].lexema)-1]+".findOne();")
+                                                                            apuntador+=8
+                                                                        else:
+                                                                            apuntador+=8
+                                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Fuera de la posicion esperada"])
+                                                                    else:
+                                                                        apuntador+=8
+                                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+7].linea,lexemas[indice+7].columna,"FinSentencia","Se esperaba un punto y coma para la funcion BuscarUnico"])
+                                                                else:
+                                                                    apuntador+=7
+                                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Fuera de la posicion esperada"])
+                                                            else:
+                                                                apuntador+=7
+                                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"CerraduraParentesis","Se esperaba un parentesis para la funcion BuscarUnico"])
+                                                        else:
+                                                            apuntador+=6
+                                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Fuera de la posicion esperada"])
+                                                    else:
+                                                        apuntador+=6
+                                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+6].linea,lexemas[indice+6].columna,"String","Se esperaba un String para la funcion BuscarUnico"])
+                                                else:
+                                                    apuntador+=5
+                                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Fuera de la posicion esperada"])
+                                            else:
+                                                apuntador+=5
+                                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+5].linea,lexemas[indice+5].columna,"AperturaParentesis","Se esperaba un parentesis para la funcion BuscarUnico"])
+                                        else:
+                                            apuntador+=4
+                                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"BuscarUnico","Fuera de la posicion esperada"])
+                                    else:
+                                        apuntador+=4
+                                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+4].linea,lexemas[indice+4].columna,"BuscarUnico","Se esperaba la palabra reservada BuscarUnico para la funcion BuscarUnico"])
+                                else:
+                                    apuntador+=3
+                                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Fuera de la posicion esperada"])
+                            else:
+                                apuntador+=3
+                                errores_sintacticos.append(["Error Sintactico",lexemas[indice+3].linea,lexemas[indice+3].columna,"nueva","Se esperaba la palabra reservada nueva para la funcion BuscarUnico"])
+                        else:
+                            apuntador+=2
+                            errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Fuera de la posicion esperada"])
+                    else:
+                        apuntador+=2
+                        errores_sintacticos.append(["Error Sintactico",lexemas[indice+2].linea,lexemas[indice+2].columna,"Igual","Se esperaba un signo igual para la funcion BuscarUnico"])
+                else:
+                    apuntador+=1
+                    errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Fuera de la posicion esperada"])
+            else:
+                errores_sintacticos.append(["Error Sintactico",lexemas[indice+1].linea,lexemas[indice+1].columna,"Identificador","Se esperaba un identificador para la funcion BuscarUnico"])
+                apuntador+=1
         else:
             apuntador+=1
+            
 print(salida)
 print(errores_sintacticos)
 
