@@ -7,3 +7,6 @@ class Lexema:
         self.columna=columna
         self.token=""
         self.error=""
+
+
+        

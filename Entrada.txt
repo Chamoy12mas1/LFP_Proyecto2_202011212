@@ -1,5 +1,5 @@
 CrearBD ejemplo = nueva CrearBD();
-EliminarBD elimina = nueva EliminarBD();
+EliminarBD elimina = nueva EliminarBD(); 
 CrearColeccion colec = nueva CrearColeccion("NombreColeccion");
 EliminarColeccion eliminacolec = nueva EliminarColeccion("NombreColeccion");
 --- Esto es un comentario
@@ -30,3 +30,4 @@ varias lineas
 */
 BuscarTodo todo = nueva BuscarTodo ("NombreColeccion");
 BuscarUnico todo = nueva BuscarUnico ("NombreColeccion");
+
