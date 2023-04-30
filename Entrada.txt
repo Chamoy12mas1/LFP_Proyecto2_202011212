@@ -3,6 +3,7 @@ EliminarBD elimina = nueva EliminarBD();
 CrearColeccion colec = nueva CrearColeccion("NombreColeccion");
 EliminarColeccion eliminacolec = nueva
 EliminarColeccion("NombreColeccion");
+--- Esto es un comentario
 InsertarUnico insertadoc = nueva InsertarUnico("NombreColeccion" , @adsfa/
 "
 {
@@ -10,9 +11,6 @@ InsertarUnico insertadoc = nueva InsertarUnico("NombreColeccion" , @adsfa/
  "autor" : "Jorge Luis"
  }
 ");
-Funcion Nombre = nueva Funcion("identificador");
-Funcion Nombre = nueva Funcion();
-Funcion Nombre = nueva Funcion("", "JSON");
 ActualizarUnico actualizadoc = nueva ActualizarUnico("NombreColeccion",
 "
 {
@@ -28,5 +26,8 @@ EliminarUnico eliminadoc = nueva EliminarUnico("NombreColeccion",
  "nombre" : "Obra Literaria"
 }
 ");
+/* comentario
+varias lineas
+*/
 BuscarTodo todo = nueva BuscarTodo ("NombreColeccion");
 BuscarUnico todo = nueva BuscarUnico ("NombreColeccion");
