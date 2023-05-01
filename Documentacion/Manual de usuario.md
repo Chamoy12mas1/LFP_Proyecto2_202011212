@@ -18,7 +18,7 @@ Habiendo realizado los pasos anteriores se mostrará un mensaje de confirmación
 Esta opción te permite cargar datos desde un archivo solo debes indicar la ubicación del archivo mediante un explorador de archivos.
 
 Si realizas todo bien el archivo se cargará de lo contrario aparecerá el siguiente mensaje:
-![d](./Imagenes/5.png)
+![d](./Imagenes/8.png)
 
 ## D) Botón Guardar
 Este botón te permite guardar los cambios realizados en el editor a un archivo previamente cargado, ojo anteriormente se tuvo que cargar un archivo de lo contrario se mostrara el siguiente mensaje: 
@@ -35,15 +35,15 @@ Este botón cierra el programa
 
 ## G) Botón Analizar
 Este botón ejecutara el análisis de los datos del editor y mostrara la salida en el campo de la derecha.
-![g](./Imagenes/8.png)
+![g](./Imagenes/9.png)
 
 ## H) Botón Tokens
 Después de analizar este botón mostrara una nueva ventana con los tokens reconocidos de la siguiente manera:
-![h](./Imagenes/9.png)
+![h](./Imagenes/10.png)
 
 ## G) Botón Errores
 Después de analizar este botón mostrara una nueva ventana con los errores encontrados de la siguiente manera:
-![G](./Imagenes/10.png)
+![G](./Imagenes/11.png)
 
 
 ## G) Botón Guardar Salida
