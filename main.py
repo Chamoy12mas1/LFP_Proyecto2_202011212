@@ -68,10 +68,13 @@ Cy=Label(raiz,textvariable=y,width=11,font=("Arial Black",11)).place(x=465,y=700
 
 def Nuevo():
     global text
+    global text1
     global ruta_raiz
+    global tokens
+    global Errores_doc
     texto_editor=text.get("1.0","end")
     def GuardarArchivoComo():
-        global texto_archivo
+        
         filename=filedialog.asksaveasfilename(initialdir = "/",title = "Guardar como",filetypes = (("txt files","*.txt"),("todos los archivos","*.*")))
         try:
             ruta=str(filename)
@@ -87,13 +90,23 @@ def Nuevo():
         if guardar==True:
             GuardarArchivoComo()
             text.delete("1.0","end")
+            text1.delete("1.0","end")
+            tokens=""
+            Errores_doc=""
             ruta_raiz=""
         else:
             text.delete("1.0","end")
+            text1.delete("1.0","end")
+            tokens=""
+            Errores_doc=""
             ruta_raiz=""
             messagebox.showinfo("Notificacion","Editor limpiado correctamente")
     else:
         text.delete("1.0","end")
+        text1.delete("1.0","end")
+        tokens=""
+        Errores_doc=""
+
         ruta_raiz=""
         messagebox.showinfo("Notificacion","Editor limpiado correctamente")
 
@@ -144,7 +157,7 @@ def Abrir():
             text.delete("1.0","end")
             text.insert('1.0',escritura)
         except:
-            messagebox.showerror("Advertencia", "Tienes que elegir una ruta y un nombre para el guardado")
+            messagebox.showerror("Advertencia", "Tienes que elegir un archivo")
     
     if texto_editor!="\n":
         guardar=messagebox.askyesno(message="¿Quieres guardar el archivo?", title="Guardar")
