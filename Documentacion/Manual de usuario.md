@@ -2,7 +2,7 @@
 
 ## A) Menú Principal
 Al ejecutar el programa lo primero que se observara es la siguiente ventana:
-![menu principal](https://drive.google.com/file/d/1WouiaevISBf8HYykd4K2Zi5l8beOTMHx/view)
+![menu principal](./Imagenes/14.png)
 En esta ventana lo primero que observamos son dos campos de texto, el campo de la izquierda es donde puedes ingresar texto para poder analizar después, además de que en esta área aparecerá el texto de los archivos que hayas cargado en la parte inferior de este campo observamos 4 marcadores los cuales mostraran la información de donde está el puntero dentro le campo de texto esta información se actualiza cada vez que hagas clic.
 
 ## B) Botón Nuevo
